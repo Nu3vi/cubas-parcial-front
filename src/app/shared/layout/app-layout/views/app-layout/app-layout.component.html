@@ -1,0 +1,28 @@
+<div class="min-h-screen bg-white dark:bg-gray-900 flex">
+    <aside class="fixed inset-y-0 left-0 z-50 transition-transform duration-300 ease-in-out"
+        [class.-translate-x-full]="sidebarHidden() || !sidebarVisible()"
+        [class.translate-x-0]="!sidebarHidden() || sidebarVisible()">
+        <app-app-sidebar [isVisible]="sidebarVisible()" (toggleSidebar)="toggleSidebar()" />
+    </aside>
+
+    <div *ngIf="sidebarVisible() && isMobile" class="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
+        (click)="closeSidebar()">
+    </div>
+
+    <div class="flex-1 flex flex-col transition-all duration-300 ease-in-out" [class.lg:ml-64]="!sidebarHidden()">
+
+        <header class="sticky top-0 z-30">
+            <app-app-topbar [sidebarHidden]="sidebarHidden()" (toggleSidebar)="toggleSidebar()" />
+        </header>
+
+        <main class="flex-1 p-4 lg:p-6">
+            <div class="max-w-7xl mx-auto">
+                <router-outlet />
+            </div>
+        </main>
+
+        <footer class="mt-auto">
+            <app-app-footer />
+        </footer>
+    </div>
+</div>

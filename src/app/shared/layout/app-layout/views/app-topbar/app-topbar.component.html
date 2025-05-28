@@ -1,0 +1,68 @@
+        <p-toolbar class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm">
+            <div class="flex items-center justify-between w-full">
+
+                <div class="flex items-center gap-4">
+                    <p-button icon="pi pi-bars" [text]="true" [rounded]="true" severity="secondary" size="small"
+                        (onClick)="onToggleSidebar()" class="lg:hidden" />
+
+                    <p-button [icon]="sidebarHidden() ? 'pi pi-angle-right' : 'pi pi-angle-left'"
+                        [text]="true" [rounded]="true" severity="secondary" size="small" (onClick)="onToggleSidebar()" class="hidden lg:flex" />
+
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <i class="pi pi-bolt text-white text-sm"></i>
+                        </div>
+                        <span class="font-semibold text-gray-900 dark:text-white text-lg hidden sm:block">
+                            MiguelParcial
+                        </span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+
+                    <p-button icon="pi pi-bell" [text]="true" [rounded]="true" severity="secondary" size="small" pBadge="3" badgeClass="p-badge-danger" />
+
+                    <p-button icon="pi pi-moon" class="dark:hidden" [text]="true" [rounded]="true" severity="secondary" size="small" (onClick)="modoOscuro()" />
+                    <p-button icon="pi pi-sun" class="hidden dark:block" [text]="true" [rounded]="true" severity="secondary" size="small" (onClick)="modoOscuro()" />
+
+                    <div class="flex items-center gap-2 ml-2">
+                        <p-avatar [label]="getInitials()" styleClass="bg-blue-500 text-white" size="normal" shape="circle" />
+
+                        <div class="hidden sm:block">
+                            <div class="text-sm font-medium text-gray-900 dark:text-white">
+                                {{ authService.username() }}
+                            </div>
+                            <div class="text-xs text-gray-500 dark:text-gray-400">
+                                Administrador
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="relative inline-block text-left" (clickOutside)="open.set(false)">
+                        <button (click)="open.set(!open())" class="inline-flex items-center justify-center w-full px-3 py-1 text-sm font-medium text-gray-700
+                            rounded-md shadow-sm hover:bg-gray-50 focus:outline-none cursor-pointer" type="button">
+                            <i class="pi pi-angle-down"></i>
+                        </button>
+
+                        <div *ngIf="open()" class="absolute right-0 z-50 mt-8 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-gray-400 ring-opacity-5 focus:outline-none">
+                            <div class="py-1">
+                                <button class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center cursor-pointer gap-2"
+                                    (click)="goToProfile()">
+                                    <i class="pi pi-user"></i> Mi Perfil
+                                </button>
+                                <button class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center cursor-pointer gap-2"
+                                    (click)="goToSettings()">
+                                    <i class="pi pi-cog"></i> Configuración
+                                </button>
+                                <div class="border-t my-1"></div>
+                                <button class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 flex items-center cursor-pointer gap-2"
+                                    (click)="logout()">
+                                    <i class="pi pi-sign-out"></i> Cerrar Sesión
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </p-toolbar>
